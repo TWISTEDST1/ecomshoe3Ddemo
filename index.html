@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>STELLA SHOP — Sneakers & essentials</title>
+<meta name="description" content="STELLA SHOP: original sneakers, caps, socks and totes, shown in live 3D.">
+<meta name="theme-color" content="#f6f3ee">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23e8432e' d='M12 0C12.6 6.5 17.5 11.4 24 12C17.5 12.6 12.6 17.5 12 24C11.4 17.5 6.5 12.6 0 12C6.5 11.4 11.4 6.5 12 0Z'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/build/three.module.min.js", "three/addons/": "./vendor/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 0C12.6 6.5 17.5 11.4 24 12C17.5 12.6 12.6 17.5 12 24C11.4 17.5 6.5 12.6 0 12C6.5 11.4 11.4 6.5 12 0Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.3-9.2C1.5 7.4 3.6 4 7 4c2.1 0 3.6 1.2 5 3 1.4-1.8 2.9-3 5-3 3.4 0 5.5 3.4 4.3 6.8C19.5 15.4 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-heart-fill" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.3-9.2C1.5 7.4 3.6 4 7 4c2.1 0 3.6 1.2 5 3 1.4-1.8 2.9-3 5-3 3.4 0 5.5 3.4 4.3 6.8C19.5 15.4 12 20 12 20Z"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7" cy="18" r="2" fill="currentColor"/><circle cx="17" cy="18" r="2" fill="currentColor"/></symbol>
+  <symbol id="i-return" viewBox="0 0 24 24"><path d="M4 9h11a5 5 0 0 1 0 10H8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m8 5-4 4 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 18h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v4h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></symbol>
+</svg>
+
+<a class="skip" href="#shop">Skip to products</a>
+
+<div class="announce" role="note">
+  <div class="announce__track">
+    <span>Free delivery on orders over $100</span><span>Easy 30-day returns</span><span>Pay by card or Mobile Money</span><span>New: the Night drop is live</span>
+    <span aria-hidden="true">Free delivery on orders over $100</span><span aria-hidden="true">Easy 30-day returns</span><span aria-hidden="true">Pay by card or Mobile Money</span><span aria-hidden="true">New: the Night drop is live</span>
+  </div>
+</div>
+
+<header class="header" id="top">
+  <div class="header__inner wrap">
+    <button class="icon-btn header__burger" id="burger" aria-label="Open menu" aria-expanded="false"><svg><use href="#i-menu"/></svg></button>
+    <a class="logo" href="#top" aria-label="STELLA SHOP home">
+      <svg class="logo__mark"><use href="#i-star"/></svg>
+      <span class="logo__word">STELLA<span>SHOP</span></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#shop" data-filter="new">New in</a>
+      <a href="#shop" data-filter="sneakers">Sneakers</a>
+      <a href="#shop" data-filter="accessories">Accessories</a>
+      <a href="#shop" data-filter="sale">Sale</a>
+      <a href="#drop">The Night drop</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="header__actions">
+      <label class="search">
+        <svg><use href="#i-search"/></svg>
+        <input id="search" type="search" placeholder="Search" autocomplete="off" aria-label="Search products">
+      </label>
+      <button class="icon-btn" id="openWish" aria-label="Wishlist"><svg><use href="#i-heart"/></svg><span class="count" id="wishCount" hidden>0</span></button>
+      <button class="icon-btn" id="openCart" aria-label="Shopping bag"><svg><use href="#i-bag"/></svg><span class="count" id="cartCount" hidden>0</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__inner wrap">
+      <div class="hero__copy">
+        <p class="eyebrow"><svg><use href="#i-star"/></svg> Fall / Winter 2026</p>
+        <h1>Walk among<br>the <em>stars.</em></h1>
+        <p class="lead">Original sneakers and everyday essentials, designed in Accra. Turn every pair in live 3D before it's yours.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--dark" href="#shop" data-filter="sneakers">Shop sneakers <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost" href="#shop" data-filter="new">New arrivals</a>
+        </div>
+        <dl class="hero__stats">
+          <div><dt>4.9</dt><dd>average rating</dd></div>
+          <div><dt>30 days</dt><dd>free returns</dd></div>
+          <div><dt>48 h</dt><dd>delivery in Accra</dd></div>
+        </dl>
+      </div>
+      <div class="hero__stage">
+        <div class="hero__halo" aria-hidden="true"></div>
+        <canvas id="heroCanvas" aria-label="Volt Rider Hi in 3D. Drag to turn it."></canvas>
+        <div class="hero__card">
+          <img id="heroThumb" alt="" width="56" height="70">
+          <div><strong>Volt Rider Hi</strong><span>Cobalt / Cream · $129</span></div>
+          <button class="btn btn--small btn--dark" data-quick="volt-hi-cobalt">View</button>
+        </div>
+        <p class="hint"><svg><use href="#i-rotate"/></svg> Drag to turn</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits strip -->
+  <section class="perks wrap" aria-label="Why shop with us">
+    <div><svg><use href="#i-truck"/></svg><p><strong>Free delivery</strong>On orders over $100</p></div>
+    <div><svg><use href="#i-return"/></svg><p><strong>30-day returns</strong>Free and no questions asked</p></div>
+    <div><svg><use href="#i-shield"/></svg><p><strong>Secure checkout</strong>Encrypted payments</p></div>
+    <div><svg><use href="#i-phone"/></svg><p><strong>Mobile Money</strong>MTN, Telecel and AirtelTigo</p></div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section wrap" aria-labelledby="cat-title">
+    <div class="section__head">
+      <h2 id="cat-title">Shop by category</h2>
+      <a class="link" href="#shop" data-filter="all">View everything <svg><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="cats" id="cats"></div>
+  </section>
+
+  <!-- Products -->
+  <section class="section wrap" id="shop" aria-labelledby="shop-title">
+    <div class="section__head">
+      <div>
+        <h2 id="shop-title">The collection</h2>
+        <p class="muted" id="resultCount"></p>
+      </div>
+      <label class="sort">Sort
+        <select id="sort">
+          <option value="featured">Featured</option>
+          <option value="new">Newest</option>
+          <option value="low">Price: low to high</option>
+          <option value="high">Price: high to low</option>
+          <option value="rating">Top rated</option>
+        </select>
+      </label>
+    </div>
+    <div class="chips" id="chips" role="tablist" aria-label="Filter products"></div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+    <p class="empty" id="empty" hidden>No products match "<span id="emptyTerm"></span>". Try another search.</p>
+  </section>
+
+  <!-- Drop banner -->
+  <section class="drop" id="drop" aria-labelledby="drop-title">
+    <div class="drop__inner wrap">
+      <div class="drop__copy">
+        <p class="eyebrow eyebrow--gold"><svg><use href="#i-star"/></svg> Limited · numbered pairs</p>
+        <h2 id="drop-title">The Night drop</h2>
+        <p>Midnight nubuck, gold laces and a gold outsole. Only 500 pairs, each with its number on the heel. Restock closes in:</p>
+        <div class="countdown" id="countdown" aria-live="off">
+          <div><b data-u="d">00</b><span>days</span></div>
+          <div><b data-u="h">00</b><span>hours</span></div>
+          <div><b data-u="m">00</b><span>min</span></div>
+          <div><b data-u="s">00</b><span>sec</span></div>
+        </div>
+        <button class="btn btn--gold" data-quick="stella-low-night">Shop the drop <svg><use href="#i-arrow"/></svg></button>
+      </div>
+      <div class="drop__art">
+        <img id="dropImage" alt="Stella Low in Midnight / Gold" width="640" height="512">
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about section wrap" id="about" aria-labelledby="about-title">
+    <div class="about__copy">
+      <p class="eyebrow"><svg><use href="#i-star"/></svg> Our story</p>
+      <h2 id="about-title">Made to be looked at closely.</h2>
+      <p>STELLA started with one question: why can't you see a sneaker properly before you buy it? So every product here is shown as a real 3D model. Turn it, look at the stitching, check the sole. Then wear it for 30 days, and if it isn't right, send it back free.</p>
+      <ul class="ticks">
+        <li>Full-grain leather and recycled rubber outsoles</li>
+        <li>Designed in Accra, made in small batches</li>
+        <li>Every order packed in a recyclable box</li>
+      </ul>
+    </div>
+    <div class="about__tiles" id="aboutTiles"></div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="news wrap" aria-labelledby="news-title">
+    <div>
+      <h2 id="news-title">Get 10% off your first order</h2>
+      <p>Drops, restocks and the occasional good story. No spam, unsubscribe any time.</p>
+    </div>
+    <form class="news__form" id="newsForm" novalidate>
+      <label class="sr-only" for="newsEmail">Email address</label>
+      <input id="newsEmail" type="email" placeholder="Your email address" required>
+      <button class="btn btn--dark" type="submit">Subscribe</button>
+      <p class="news__msg" id="newsMsg" role="status"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner wrap">
+    <div class="footer__brand">
+      <a class="logo logo--light" href="#top" aria-label="STELLA SHOP home">
+        <svg class="logo__mark"><use href="#i-star"/></svg>
+        <span class="logo__word">STELLA<span>SHOP</span></span>
+      </a>
+      <p>Original sneakers and essentials, designed in Accra and shown in live 3D.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
+        <a href="#" aria-label="X"><svg><use href="#i-x"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg><use href="#i-play"/></svg></a>
+      </div>
+    </div>
+    <nav aria-label="Shop">
+      <h3>Shop</h3>
+      <a href="#shop" data-filter="new">New in</a>
+      <a href="#shop" data-filter="sneakers">Sneakers</a>
+      <a href="#shop" data-filter="caps">Caps</a>
+      <a href="#shop" data-filter="socks">Socks</a>
+      <a href="#shop" data-filter="bags">Bags</a>
+      <a href="#shop" data-filter="sale">Sale</a>
+    </nav>
+    <nav aria-label="Help">
+      <h3>Help</h3>
+      <a href="#">Delivery</a>
+      <a href="#">Returns &amp; exchanges</a>
+      <a href="#">Size guide</a>
+      <a href="#">Track an order</a>
+      <a href="#">Contact us</a>
+    </nav>
+    <nav aria-label="Company">
+      <h3>Company</h3>
+      <a href="#about">Our story</a>
+      <a href="#">Careers</a>
+      <a href="#">Stores</a>
+      <a href="#">Press</a>
+    </nav>
+    <div class="footer__contact">
+      <h3>Visit</h3>
+      <p>Oxford Street, Osu<br>Accra, Ghana</p>
+      <p>Mon–Sat, 9:00–19:00</p>
+      <p><a href="mailto:hello@stellashop.example">hello@stellashop.example</a></p>
+    </div>
+  </div>
+  <div class="footer__bottom wrap">
+    <p>© <span id="year">2026</span> STELLA SHOP. A demo store: products, prices and checkout are for display only.</p>
+    <ul class="pay" aria-label="Payment methods">
+      <li>Visa</li><li>Mastercard</li><li>MTN MoMo</li><li>Telecel Cash</li><li>PayPal</li>
+    </ul>
+    <nav class="legal" aria-label="Legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></nav>
+  </div>
+</footer>
+
+<!-- Mobile menu -->
+<div class="sheet sheet--left" id="menu" aria-hidden="true">
+  <div class="sheet__panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="sheet__head"><span class="logo__word">STELLA<span>SHOP</span></span><button class="icon-btn" data-close aria-label="Close menu"><svg><use href="#i-close"/></svg></button></div>
+    <nav class="menu-links" id="menuLinks"></nav>
+  </div>
+</div>
+
+<!-- Cart drawer -->
+<div class="sheet" id="cart" aria-hidden="true">
+  <div class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="sheet__head"><h2 id="cart-title">Your bag</h2><button class="icon-btn" data-close aria-label="Close bag"><svg><use href="#i-close"/></svg></button></div>
+    <div class="ship" id="ship"><p id="shipText"></p><div class="ship__bar"><span id="shipBar"></span></div></div>
+    <ul class="lines" id="lines"></ul>
+    <div class="cart-empty" id="cartEmpty">
+      <svg><use href="#i-bag"/></svg>
+      <p>Your bag is empty.</p>
+      <a class="btn btn--dark" href="#shop" data-close>Start shopping</a>
+    </div>
+    <div class="sheet__foot" id="cartFoot">
+      <div class="row"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+      <p class="muted small">Taxes and delivery calculated at checkout.</p>
+      <button class="btn btn--dark btn--block" id="checkout">Checkout <svg><use href="#i-arrow"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- Wishlist drawer -->
+<div class="sheet" id="wish" aria-hidden="true">
+  <div class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="wish-title">
+    <div class="sheet__head"><h2 id="wish-title">Wishlist</h2><button class="icon-btn" data-close aria-label="Close wishlist"><svg><use href="#i-close"/></svg></button></div>
+    <ul class="lines" id="wishLines"></ul>
+    <div class="cart-empty" id="wishEmpty"><svg><use href="#i-heart"/></svg><p>Tap the heart on any product to save it here.</p></div>
+  </div>
+</div>
+
+<!-- Quick view -->
+<div class="modal" id="quick" aria-hidden="true">
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="qv-name">
+    <button class="icon-btn modal__close" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+    <div class="qv__stage" id="qvStage">
+      <canvas id="qvCanvas" aria-label="Product in 3D. Drag to turn it."></canvas>
+      <p class="hint"><svg><use href="#i-rotate"/></svg> Drag to turn</p>
+      <div class="qv__thumbs" id="qvThumbs"></div>
+    </div>
+    <div class="qv__info">
+      <p class="eyebrow" id="qv-badge"></p>
+      <h2 id="qv-name"></h2>
+      <p class="muted" id="qv-colour"></p>
+      <div class="qv__price" id="qv-price"></div>
+      <div class="rating" id="qv-rating"></div>
+      <p id="qv-blurb"></p>
+      <div id="qv-sizesWrap">
+        <div class="row"><strong>Size</strong><a class="link small" href="#">Size guide</a></div>
+        <div class="sizes" id="qv-sizes" role="radiogroup" aria-label="Size"></div>
+        <p class="error small" id="qv-sizeErr" hidden>Choose a size first.</p>
+      </div>
+      <div class="qv__actions">
+        <div class="qty" aria-label="Quantity">
+          <button id="qtyMinus" aria-label="Less">−</button><span id="qty">1</span><button id="qtyPlus" aria-label="More">+</button>
+        </div>
+        <button class="btn btn--dark btn--grow" id="addToBag">Add to bag</button>
+        <button class="icon-btn icon-btn--outline" id="qvWish" aria-label="Save to wishlist"><svg><use href="#i-heart"/></svg></button>
+      </div>
+      <details class="acc"><summary>Delivery &amp; returns</summary><p>Free delivery over $100, otherwise $6. Delivered in 48 hours in Accra and 3–5 days elsewhere in Ghana. Returns are free for 30 days.</p></details>
+      <details class="acc"><summary>Materials &amp; care</summary><p>Wipe leather with a damp cloth and let it dry naturally. Machine-wash socks and totes at 30 °C.</p></details>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
