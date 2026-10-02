@@ -6,6 +6,7 @@
  */
 import { PRODUCTS, CATEGORIES, FREE_SHIPPING_FROM, money, byId } from './products.js';
 import { photograph, Viewer } from './studio.js';
+import { clawToBag } from './claw.js';
 
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -352,9 +353,23 @@ $('#addToBag').addEventListener('click', () => {
     const s = $('#qv-sizes'); s.classList.remove('shake'); void s.offsetWidth; s.classList.add('shake');
     return;
   }
-  addToCart(current.id, qvSize, qvQty);
+  // The claw lifts the product out of the quick view and drops it in the bag; it counts as added
+  // the moment it lands.
+  const p = current, size = qvSize, qty = qvQty;
+  const from = $('#qvStage').getBoundingClientRect();
+  const yaw = qvViewer ? qvViewer.yaw : -0.55;
   closeLayer('quick');
+  dropInBag(p, from, yaw).then(() => addToCart(p.id, size, qty));
 });
+/** Plays the claw from a page rectangle to the bag icon (scrolled-away headers fall back to the top-right corner). */
+function dropInBag(p, from, yaw) {
+  const icon = $('#openCart').getBoundingClientRect();
+  const to = icon.bottom > 0 ? icon : new DOMRect(innerWidth - 56, 8, 40, 40);
+  $('#openCart').classList.add('catching');
+  return clawToBag({ spec: p.spec, from, to, yaw }).finally(() => {
+    const b = $('#openCart'); b.classList.remove('catching', 'caught'); void b.offsetWidth; b.classList.add('caught');
+  });
+}
 $('#checkout').addEventListener('click', () => toast('<span><strong>This is a demo store.</strong><br>Checkout isn’t connected to payments.</span>'));
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
@@ -398,16 +413,6 @@ function tickCountdown() {
 }
 setInterval(tickCountdown, 1000);
 tickCountdown();
-
-// The claw drop (kickdrop/, in an iframe) plays only while it's on screen, from the top each time.
-{
-  const frame = $('#liveFrame');
-  const tell = (msg) => frame.contentWindow?.postMessage({ type: 'kickdrop', ...msg }, location.origin);
-  let visible = false;
-  new IntersectionObserver(([e]) => { visible = e.intersectionRatio > 0.35; tell({ visible }); }, { threshold: [0, 0.35, 0.6] }).observe(frame);
-  frame.addEventListener('load', () => tell({ visible }));
-  $('#liveReplay').addEventListener('click', () => tell({ replay: true }));
-}
 
 // ---------------------------------------------------------------------------------------------
 // Start
