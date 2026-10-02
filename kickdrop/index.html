@@ -17,6 +17,8 @@
     color: #16171c; background: rgba(255,255,255,.82); box-shadow: 0 6px 20px rgba(0,0,0,.14);
     backdrop-filter: blur(8px); cursor: pointer; }
   .hud button:active { transform: scale(.96); }
+  body.embed { background: transparent; }
+  body.embed .tag, body.embed .hud { display: none; }
   .tag { position: fixed; top: max(14px, env(safe-area-inset-top)); left: 0; right: 0; text-align: center;
     font: 600 12px/1 inherit; letter-spacing: .14em; text-transform: uppercase; color: rgba(22,23,28,.45); }
 </style>

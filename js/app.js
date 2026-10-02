@@ -399,6 +399,16 @@ function tickCountdown() {
 setInterval(tickCountdown, 1000);
 tickCountdown();
 
+// The claw drop (kickdrop/, in an iframe) plays only while it's on screen, from the top each time.
+{
+  const frame = $('#liveFrame');
+  const tell = (msg) => frame.contentWindow?.postMessage({ type: 'kickdrop', ...msg }, location.origin);
+  let visible = false;
+  new IntersectionObserver(([e]) => { visible = e.intersectionRatio > 0.35; tell({ visible }); }, { threshold: [0, 0.35, 0.6] }).observe(frame);
+  frame.addEventListener('load', () => tell({ visible }));
+  $('#liveReplay').addEventListener('click', () => tell({ replay: true }));
+}
+
 // ---------------------------------------------------------------------------------------------
 // Start
 // ---------------------------------------------------------------------------------------------

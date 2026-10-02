@@ -20,15 +20,20 @@
 
 ## Highlights
 
+- **Drops, live.** Right below the hero, a claw lifts the sneaker out of the STELLA app on a 3D phone, the countdown hits zero, the shoe drops into its product card, spins, and turns into its box with a SUCCESS badge and confetti. It starts from the top every time it scrolls into view and draws nothing while it's off screen.
 - **Live 3D hero.** The featured sneaker floats and spins in the hero. Drag or swipe to turn it; a flick keeps it spinning, then it settles back into an idle turn.
 - **Product photos made in the browser.** Twelve products are rendered from their 3D models on page load, two angles each, in a soft-shadow photo studio. There are no image files and no stock photos.
 - **Original 3D models built in code.** High-top and low-top sneakers (a lofted upper with a painted texture, a stitched and lettered side, extruded soles and laces), six-panel caps, flat-lay crew socks and canvas totes. One builder plus a colourway makes a whole product line.
 - **A complete shop.** Category tiles, filter chips with counts, live search, sorting, sale and stock badges, ratings, wishlist and bag with quantities, a free-delivery progress bar, and everything saved between visits.
 - **3D quick view.** Size picker with validation, quantity, add to bag, wishlist, and delivery and care details, next to a draggable 3D viewer.
 - **Made to feel finished.** Sticky header with a blur, scrolling announcement bar, a limited-drop banner with a live countdown, newsletter sign-up with validation, a full footer, toasts, keyboard and screen-reader support, reduced-motion support and a responsive layout from phones to wide screens.
-- **Bonus: [Kickdrop](kickdrop/).** A looping product-launch animation: a claw lifts the sneaker out of a phone screen, the countdown hits zero, and the shoe drops into its card and turns into a box with confetti.
+- **The drop animation on its own:** open [kickdrop/](kickdrop/) for a full-screen version with Replay and sound.
 
 ## Screenshots
+
+| Drops, live: the claw lifts the pair out | …and it lands in the card, boxed |
+|---|---|
+| ![The claw lifting the sneaker out of the phone](docs/live-drop.jpg) | ![The sneaker in its product card](docs/live-drop-2.jpg) |
 
 | Product grid | 3D quick view |
 |---|---|
@@ -62,13 +67,14 @@ js/products.js    the catalogue: names, prices, badges, sizes and each product's
 js/models.js      the 3D models (sneaker, cap, socks, tote) and their painted textures
 js/studio.js      the photo studio (renders product photos) and the live 3D viewer
 js/app.js         the storefront: grid, filters, search, sort, bag, wishlist, quick view
-kickdrop/         the product-launch animation
+kickdrop/         the claw drop animation (embedded in the shop's "Drops, live" section)
 vendor/three/     three.js (MIT licence)
 ```
 
 - **Photos.** `studio.js` keeps one offscreen WebGL renderer with an environment map, a soft-shadow key light and a shadow-catching floor. Each model is framed automatically from its bounding box and drawn from two angles; the frames are encoded off the main thread with `canvas.toBlob`, so the page stays responsive while the catalogue renders.
 - **Viewer.** The hero and quick-view canvases run a small render loop that pauses whenever the canvas is off screen, with pointer drag, inertia, idle spin and a gentle float.
 - **Models.** The sneaker upper is a loft of superellipse cross-sections whose height and width follow two spline profiles (one for high-tops, one for lows). Its texture (overlays, stitching, eyelets, perforations and the sparkle mark) is painted on a canvas in the upper's own UV space, so every colourway is just a set of colours.
+- **Drops, live.** The animation runs in `kickdrop/` and is embedded with `?embed=1` (no page chrome, transparent background). The shop tells it when it is on screen with `postMessage` from an `IntersectionObserver`, so it restarts when it comes into view and stops drawing when it leaves. Its timeline is a pure function of time, so Replay just resets the clock.
 - **State.** Bag and wishlist live in `localStorage`, so they survive reloads.
 
 ## Customise

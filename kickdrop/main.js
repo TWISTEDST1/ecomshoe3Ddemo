@@ -55,6 +55,18 @@ function roundedRect(w, h, r) {
   s.lineTo(x, y + r); s.absarc(x + r, y + r, r, Math.PI, Math.PI * 1.5);
   return s;
 }
+/** The STELLA sparkle (a four-point star) centred at (x, y). */
+function drawStar(g, x, y, r, fill) {
+  g.beginPath();
+  g.moveTo(x, y - r);
+  g.bezierCurveTo(x + r * 0.05, y - r * 0.3, x + r * 0.3, y - r * 0.05, x + r, y);
+  g.bezierCurveTo(x + r * 0.3, y + r * 0.05, x + r * 0.05, y + r * 0.3, x, y + r);
+  g.bezierCurveTo(x - r * 0.05, y + r * 0.3, x - r * 0.3, y + r * 0.05, x - r, y);
+  g.bezierCurveTo(x - r * 0.3, y - r * 0.05, x - r * 0.05, y - r * 0.3, x, y - r);
+  g.closePath();
+  g.fillStyle = fill;
+  g.fill();
+}
 function canvasOf(w, h) {
   const c = document.createElement('canvas');
   c.width = w; c.height = h;
@@ -141,12 +153,11 @@ function paintUpper() {
   for (let r = 0; r < 3; r++) for (let i = 0; i < 4; i++) for (const side of [-1, 1]) {
     const [x, y] = px(0.8 + i * 0.022 - r * 0.004, 0.5 + side * (0.045 + r * 0.045)); g.beginPath(); g.arc(x, y, 3, 0, 7); g.fill();
   }
-  // The side mark: a bolt, yellow with a dark keyline.
-  const bolt = [[0.37, 0.185], [0.5, 0.245], [0.475, 0.175], [0.6, 0.145], [0.43, 0.07], [0.47, 0.14]];
+  // The side mark: the STELLA sparkle, yellow with a dark keyline (the same mark as the shop's shoes).
   for (const mirror of [false, true]) {
-    g.beginPath();
-    bolt.forEach(([u, v], i) => { const [x, y] = px(u, mirror ? 1 - v : v); i ? g.lineTo(x, y) : g.moveTo(x, y); });
-    g.closePath(); g.lineJoin = 'round'; g.lineWidth = 9; g.strokeStyle = C.dark; g.stroke(); g.fillStyle = C.bolt; g.fill();
+    const [x, y] = px(0.5, mirror ? 0.84 : 0.16);
+    drawStar(g, x, y, 62, C.dark);
+    drawStar(g, x, y, 52, C.bolt);
   }
   const tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;
@@ -282,7 +293,7 @@ function drawUI(st) {
   rr(462, 40, 38, 18, 5); g.lineWidth = 2; g.strokeStyle = '#111'; g.stroke(); rr(465, 43, 26, 12, 3); g.fill();
   // Shop header.
   g.lineWidth = 4; g.strokeStyle = '#111'; g.beginPath(); g.arc(50, 116, 12, 0, 7); g.moveTo(59, 125); g.lineTo(68, 134); g.stroke();
-  text('kickdrop', 82, 128, `800 34px ${F}`, '#111');
+  text('stella', 82, 128, `800 34px ${F}`, '#111');
   g.lineWidth = 3.5; g.beginPath(); g.moveTo(424, 110); g.bezierCurveTo(424, 96, 444, 96, 444, 110); g.bezierCurveTo(444, 96, 464, 96, 464, 110); g.bezierCurveTo(464, 124, 444, 134, 444, 138); g.bezierCurveTo(444, 134, 424, 124, 424, 110); g.stroke();
   rr(484, 108, 30, 30, 6); g.stroke(); g.beginPath(); g.arc(499, 108, 8, Math.PI, 0); g.stroke();
   g.fillStyle = '#ff4b3e'; g.beginPath(); g.arc(516, 104, 9, 0, 7); g.fill();
@@ -294,14 +305,14 @@ function drawUI(st) {
   card(32, 236, 300, 330);
   rr(46, 250, 272, 190, 20); g.fillStyle = '#eef0f4'; g.fill();
   if (st.hero && shoeThumb) g.drawImage(shoeThumb, 52, 246, 262, 197);
-  text('Kickdrop', 52, 474, `700 20px ${F}`, '#111');
+  text('STELLA', 52, 474, `700 20px ${F}`, '#111');
   text('Volt Rider Hi', 52, 500, `500 19px ${F}`, '#77756f');
   text('$129.00', 52, 528, `700 20px ${F}`, '#111');
   rr(222, 506, 96, 36, 18); g.fillStyle = '#111'; g.fill(); text('Buy now', 270, 530, `600 16px ${F}`, '#fff', 'center');
   card(348, 236, 300, 330);
   rr(362, 250, 272, 190, 20); g.fillStyle = '#e7e4de'; g.fill();
   g.fillStyle = '#2b2d33'; g.beginPath(); g.arc(452, 300, 26, 0, 7); g.fill(); rr(400, 326, 104, 114, 26); g.fill(); // a hoodie, loosely
-  text('Kickdrop', 368, 474, `700 20px ${F}`, '#111');
+  text('STELLA', 368, 474, `700 20px ${F}`, '#111');
   text('Fleece Hood', 368, 500, `500 19px ${F}`, '#77756f');
   text('$84.00', 368, 528, `700 20px ${F}`, '#111');
   for (let i = 0; i < 4; i++) { g.fillStyle = i === 0 ? '#111' : '#c9c7c2'; rr(232 + i * 20, 588, i === 0 ? 22 : 10, 6, 3); g.fill(); }
@@ -414,10 +425,8 @@ function buildBox() {
     else { g.beginPath(); g.moveTo(-16, 12); g.lineTo(0, -16); g.lineTo(16, 12); g.closePath(); g.fill(); }
     g.restore();
   }
-  g.translate(256, 128);
-  g.beginPath();
-  [[-34, 6], [6, 40], [-2, 8], [36, -4], [-10, -42], [0, -6]].forEach(([x, y], i) => (i ? g.lineTo(x, -y) : g.moveTo(x, -y)));
-  g.closePath(); g.lineJoin = 'round'; g.lineWidth = 12; g.strokeStyle = C.dark; g.stroke(); g.fillStyle = C.bolt; g.fill();
+  drawStar(g, 256, 128, 58, C.dark);
+  drawStar(g, 256, 128, 48, C.bolt);
   const tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;
   const printed = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.75 });
@@ -556,6 +565,21 @@ const T = { emerge: [1.0, 2.5], zoomIn: [1.0, 2.8], zoomOut: [3.5, 4.7], dim: [3
 const state = { start: performance.now(), last: 0, angle: 0, vel: 0, lastUI: '', fired: new Set() };
 function restart() { state.start = performance.now(); state.last = 0; state.angle = 0; state.vel = 0; state.fired.clear(); bits.forEach((b) => (b.life = 0)); }
 document.getElementById('replay').addEventListener('click', restart);
+
+// Embedded in the shop (?embed=1): no page chrome, a transparent background, and the shop decides
+// when it plays. It starts paused and restarts from the top each time it scrolls into view, so a
+// visitor always sees the whole drop; off screen it draws nothing.
+const EMBED = new URLSearchParams(location.search).has('embed');
+let running = !EMBED;
+if (EMBED) document.body.classList.add('embed');
+window.addEventListener('message', (e) => {
+  if (e.origin !== location.origin || !e.data || e.data.type !== 'kickdrop') return;
+  if ('visible' in e.data) {
+    if (e.data.visible && !running) restart();
+    running = !!e.data.visible;
+  }
+  if (e.data.replay) { restart(); running = true; }
+});
 /** Runs `fn` once per loop, the first frame `t` passes `at`. */
 function once(name, t, at, fn) { if (t >= at && !state.fired.has(name)) { state.fired.add(name); fn(); } }
 
@@ -578,6 +602,7 @@ resize();
 
 function frame(now) {
   requestAnimationFrame(frame);
+  if (!running) return;
   let t = (now - state.start) / 1000;
   if (t > T.loop) { restart(); t = 0; }
   const dt = Math.min(0.05, Math.max(0, t - state.last));
